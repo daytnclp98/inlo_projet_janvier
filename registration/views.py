@@ -2,4 +2,4 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 def tarifs(request):
-    return HttpResponse()
+    return render(request, 'tarifs.html')
