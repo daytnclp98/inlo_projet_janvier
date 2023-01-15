@@ -61,9 +61,9 @@ class ModelTest(TestCase):
         self.assertEqual(club , Inscription.objects.first().nom_club)
 
     def test_rabais_if_club_esig(self):
-        ins = Inscription(nom_club='FC_ESIG')
-        self.assertEqual(0.5, ins.rabais())
+        ins = Inscription(nom_club='FC ESIG')
+        self.assertEqual(ins.prix_de_base * 0.5, ins.rabais())
 
     def test_rabais_if_nbEquipes(self):
-        ins = Inscription(nb_Equipe= 1)
-        self.assertEqual('Pas de rabais pour cette inscription ! ', ins.rabais())
+        ins = Inscription(nb_Equipe= 5)
+        self.assertEqual(ins.prix_de_base * 0.5, ins.rabais())
