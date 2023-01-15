@@ -34,10 +34,12 @@ class ViewTest(TestCase):
         response = self.client.get(TARIFS_PATH)
         self.assertTemplateUsed(response, 'tarifs.html')
 
+    def test_tarif_contient_contenu(self):
+        response = self.client.get(TARIFS_PATH)
+        self.assertIn('inscription', response.context)
+
 
 # TesterModels
-
-
 class ModelTest(TestCase):
     def test_inscription_model_existe(self):
         self.assertIsInstance(Inscription(), Model)

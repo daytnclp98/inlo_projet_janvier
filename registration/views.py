@@ -1,6 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from registration.models import Inscription
+
+
 def tarifs(request):
-    return render(request, 'tarifs.html')
+    inscription = Inscription.objects.all()
+    return render(request, 'tarifs.html', {'inscription' : [inscription]})
 
