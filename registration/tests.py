@@ -24,19 +24,27 @@ class URLTest(TestCase):
 class ViewTest(TestCase):
 
     def setUp(self):
-        self.response = self.client.get(TARIFS_PATH)
+        return self.client.get(TARIFS_PATH)
 
     def test_tarifs_a_titre(self):
-        response = self.client.get(TARIFS_PATH)
-        self.assertContains(self.response, 'Nos tarifs')
+        self.assertContains(self.setUp(), 'Nos tarifs')
 
     def test_tarifs_utilise_template(self):
-        response = self.client.get(TARIFS_PATH)
-        self.assertTemplateUsed(response, 'tarifs.html')
+        self.assertTemplateUsed(self.setUp(), 'tarifs.html')
 
     def test_tarif_contient_contenu(self):
-        response = self.client.get(TARIFS_PATH)
-        self.assertIn('inscription', response.context)
+        self.assertIn('inscription', self.setUp().context)
+
+    def test_inscrption_tarifs_dans_templatet(self):
+        #SETUP
+        inscription_un = Inscription(nom_club='FC ESIG', nb_Equipe=5, prix_de_base=100)
+        inscription_deux = Inscription(nom_club='FC CHAMPEL', nb_Equipe=3, prix_de_base=100)
+        inscription_un.save()
+        inscription_deux.save()
+        #EXECUTION
+        response = self.setUp()
+        self.assertContains(response, 'FC ESIG', 0, 200)
+        self.assertContains(response, 'FC CHAMPEL', 0, 200)
 
 
 # TesterModels

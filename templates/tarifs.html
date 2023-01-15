@@ -6,6 +6,12 @@
 </head>
 <body>
 <h1>Nos tarifs</h1>
+<ul>
+    {% for ins in inscription %}
+        <li>{{ ins.nom_club }}</li>
+{% endfor %}
+</ul>
+
 
 </body>
 </html>
