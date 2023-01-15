@@ -59,7 +59,7 @@ class ModelTest(TestCase):
         ins.nom_club = club
         ins.save()
         self.assertEqual(club , Inscription.objects.first().nom_club)
-
+#testLogiqueMetier
     def test_rabais_if_club_esig(self):
         ins = Inscription(nom_club='FC ESIG')
         self.assertEqual(ins.prix_de_base * 0.5, ins.rabais())
